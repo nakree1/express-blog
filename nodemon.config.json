@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules/"
+  ],
+  "env": {
+    "PORT": 3010,
+    "NODE_ENV": "development"
+  }
+}
