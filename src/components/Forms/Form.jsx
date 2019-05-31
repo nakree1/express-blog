@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios'
 
 class Form extends React.Component {
@@ -14,15 +14,30 @@ class Form extends React.Component {
     })
   }
 
-  // handleSend = () => {
-  //   this.setState({isFetching: true}, () => {
-  //     axios.post()
-  //   })
-  // }
+  handleSend = () => {
+    this.setState({isFetching: true}, () => {
+      const { email, name } = this.state;
+      axios.post('/api/users/create', { email, name })
+        .then(res => {
+          this.setState({
+            isFetching: false,
+            email: '',
+            name: ''
+          })
+        })
+        .catch(err => {
+          this.setState({
+            isFetching: false
+          })
+        })
+    })
+  }
 
 
 
   render() {
+    const {isFetching, name, email} = this.state;
+
     return (
       <main className="container">
         <div className="row">
@@ -39,6 +54,8 @@ class Form extends React.Component {
                   id="emailInput"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
+                  disabled={isFetching}
+                  value={email}
                   onChange={({currentTarget}) => this.handleChange({ field: 'email',  value: currentTarget.value})}
                 />
               </div>
@@ -50,11 +67,20 @@ class Form extends React.Component {
                   id="nameInput"
                   aria-describedby="emailHelp"
                   placeholder="Enter username"
+                  disabled={isFetching}
+                  value={name}
                   onChange={({currentTarget}) => this.handleChange({ field: 'name',  value: currentTarget.value})}
                 />
               </div>
               <div className="form-group">
-                <button type="button" className="btn btn-primary btn-block" onClick={this.handleSend}>Create</button>
+                <button type="button" className="btn btn-primary btn-block" onClick={this.handleSend} disabled={isFetching}>
+                  {isFetching ?  (
+                    <Fragment>
+                      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"/>
+                      Creating...
+                    </Fragment>
+                  ) : 'Create'}
+                </button>
               </div>
             </div>
           </div>
