@@ -3,37 +3,25 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-import { db } from './shared/db';
+const db = require('./config/db');
+
+import router from './router'
 
 const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// app.use(compression());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, '..', 'build')));
+
+app.use('/api', router);
 
 
-
-app.use('/users/test',function (req, res) {
-
-  async function getUsers() {
-    try {
-      const users = await db.any('SELECT * FROM users');
-
-      console.log(users);
-      res.send(JSON.stringify(users, 2));
-    } catch (err) {
-      console.log(err)
-      res.send(err)
-    }
-  }
-
-  getUsers();
-
-})
-
-app.use('/', (req, res) => res.send(`Hello world! ${process.env.TEST}`));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, '..', 'build', 'index.html')))
+// app.use('/', (req, res) => res.send(`Hello world! ${process.env.TEST}`));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
