@@ -1,7 +1,7 @@
 module.exports = {
   DB_NAME: 'postgres',
-  PG_HOSTNAME: process.env.PG_HOSTNAME || 'localhost',
-  PG_PORT: Number(process.env.PG_PORT) || 5432,
-  PG_USERNAME: process.env.PG_USERNAME,
-  PG_PASSWORD: process.env.PG_PASSWORD
+  DB_HOSTNAME: process.env.DB_HOSTNAME || 'localhost',
+  DB_PORT: Number(process.env.DB_PORT) || 5432,
+  DB_USERNAME: process.env.DB_USERNAME,
+  DB_PASSWORD: process.env.DB_PASSWORD
 }

@@ -3,9 +3,9 @@ const express = require('express');
 const path = require('path');
 // const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const db = require('./config/db');
 
 import bodyParser from "body-parser";
+
 
 export const app = express();
 const router = require('./routes/router');
@@ -13,6 +13,8 @@ const router = require('./routes/router');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
 // app.use(compression());
 // app.use(cookieParser());
 
