@@ -1,18 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const Article = sequelize.define('article', {
+  const Article = sequelize.define('Article', {
       title: {
         type: DataTypes.STRING(100),
-        unique: true,
-        validate: {
-          isAlphanumeric: true
-        }
+        // unique: true,
+        // allowNull: false
       },
       content: {
         type: DataTypes.STRING(1000),
-        unique: true,
-        validate: {
-          isEmail: true
-        }
+        // allowNull: false
       }
     },
     {
@@ -20,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Article.associate = function (models) {
-    this.belongsTo(models.user);
+  Article.associate = models => {
+    Article.belongsTo(models.User);
   };
 
   return Article;

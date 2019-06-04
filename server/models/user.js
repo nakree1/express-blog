@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const User = sequelize.define('User', {
       name: {
         type: DataTypes.STRING(80),
         unique: true,
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.associate = function (models) {
-    this.hasMany(models.article, {
+  User.associate = models => {
+    User.hasMany(models.Article, {
       onDelete: 'CASCADE'
     });
   };
