@@ -29,8 +29,8 @@ fs
   })
   .forEach(file => {
     const model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-    console.log(`Loaded: ${model.name} from ${file}`);
+    db[capitalizeString(model.name)] = model;
+    console.log(`Loaded: ${capitalizeString(model.name)} from ${file}`);
   });
 
 Object.keys(db).forEach(modelName => {

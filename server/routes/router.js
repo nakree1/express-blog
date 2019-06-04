@@ -1,12 +1,15 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import getUsers from '../controllers/getUsers';
+import getArticlesByUserId from '../controllers/getArticlesByUserId';
+import createUser from '../controllers/createUser';
 
 const router = express.Router({
   strict: true
 });
 
 router.get('/users', getUsers);
+router.get('/articles/:userId', getArticlesByUserId);
+router.post('/users/create', createUser)
 
 // router.use(authMiddleware);
 

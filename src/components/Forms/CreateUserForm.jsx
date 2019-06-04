@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import axios from 'axios'
 
-class Form extends React.Component {
+class CreateUserForm extends React.Component {
   state = {
     email: '',
     name: '',
@@ -33,18 +33,10 @@ class Form extends React.Component {
     })
   }
 
-  handleGetUsers = () => {
-    axios.get('/api/users')
-      .catch(err => console.log(err));
-  }
-
-
-
   render() {
     const {isFetching, name, email} = this.state;
 
     return (
-      <main className="container">
         <div className="row">
           <div className="col-6 my-5 mx-auto">
             <div className="alert alert-secondary">
@@ -86,16 +78,12 @@ class Form extends React.Component {
                     </Fragment>
                   ) : 'Create'}
                 </button>
-                <button type="button" className="btn btn-primary btn-block" onClick={this.handleGetUsers}>
-                  Get Users
-                </button>
               </div>
             </div>
           </div>
         </div>
-      </main>
     );
   }
 }
 
-export default Form;
+export default CreateUserForm;

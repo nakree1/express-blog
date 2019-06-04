@@ -8,12 +8,12 @@ export default async function createUsersWithArticles() {
   });
 
   for (let i = 0; i < 5; i++) {
-    const articles = Array(Math.abs(i - 2)).fill(getArticle());
+    const articles = Array(Math.abs(i - 2)).fill(null).map(_ => getArticle());
 
     await db.User.create({
       name: faker.internet.userName(),
       email: faker.internet.email(),
-      Articles: articles
+      articles: articles
     }, {
       include: [db.Article]
     });
