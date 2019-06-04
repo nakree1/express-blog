@@ -1,3 +1,5 @@
+import modelsMiddleware from './middlewares/modelsMiddleware';
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -19,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
+app.use(modelsMiddleware)
 
 app.use('/api', router);
 

@@ -33,6 +33,11 @@ class Form extends React.Component {
     })
   }
 
+  handleGetUsers = () => {
+    axios.get('/api/users')
+      .catch(err => console.log(err));
+  }
+
 
 
   render() {
@@ -80,6 +85,9 @@ class Form extends React.Component {
                       Creating...
                     </Fragment>
                   ) : 'Create'}
+                </button>
+                <button type="button" className="btn btn-primary btn-block" onClick={this.handleGetUsers}>
+                  Get Users
                 </button>
               </div>
             </div>

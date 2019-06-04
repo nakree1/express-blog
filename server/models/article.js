@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Article = sequelize.define('Article', {
       title: {
         type: DataTypes.STRING(100),
-        unique: true,
+        // unique: true,
         allowNull: false
       },
       content: {

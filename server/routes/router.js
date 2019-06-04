@@ -1,12 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import getUsers from '../controllers/getUsers';
 
 const router = express.Router({
   strict: true
 });
 
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: false }));
+router.get('/users', getUsers);
 
 // router.use(authMiddleware);
 
