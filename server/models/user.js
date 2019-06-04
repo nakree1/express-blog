@@ -3,10 +3,7 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(80),
         unique: true,
-        allowNull: false,
-        // validate: {
-        //   isAlphanumeric: true
-        // }
+        allowNull: false
       },
       email: {
         type: DataTypes.STRING(80),

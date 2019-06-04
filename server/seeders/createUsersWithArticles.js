@@ -5,7 +5,7 @@ export default async function createUsersWithArticles() {
   const getArticle = () => ({
     title: faker.lorem.words(),
     content: faker.lorem.paragraphs(1)
-  })
+  });
 
   for (let i = 0; i < 5; i++) {
     const articles = Array(Math.abs(i - 2)).fill(getArticle());
@@ -16,6 +16,6 @@ export default async function createUsersWithArticles() {
       Articles: articles
     }, {
       include: [db.Article]
-    })
+    });
   }
 }

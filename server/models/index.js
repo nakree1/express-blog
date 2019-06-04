@@ -14,9 +14,9 @@ const config = {
   password: DB_PASSWORD || process.env.DB_PASSWORD || '123456',
   host: DB_HOSTNAME || process.env.DB_HOSTNAME,
   port: DB_PORT || process.env.DB_PORT
-}
+};
 
-console.log(config)
+console.log(config);
 
 const db = {};
 
