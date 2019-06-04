@@ -8,8 +8,8 @@ export default async function createUsers() {
     await db.user.create({
       name: `user_${i}`,
       email: `user_${i}@mail.com`,
-      createdAt: date,
-      updatedAt: date,
+      // createdAt: date,
+      // updatedAt: date,
     })
   }
 }
