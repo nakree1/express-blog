@@ -7,6 +7,7 @@ const path = require('path');
 const logger = require('morgan');
 
 import bodyParser from "body-parser";
+import errorHandler from './controllers/errorHandler';
 
 
 export const app = express();
@@ -30,19 +31,11 @@ app.get("*", (req, res) => res.sendFile(path.join(__dirname, '..', 'build', 'ind
 // app.use('/', (req, res) => res.send(`Hello world! ${process.env.TEST}`));
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
-});
+// app.use((req, res, next) => {
+//   next(createError(404));
+// });
 
 // error handler
-app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.send('error');
-});
+app.use(errorHandler);
 
 module.exports = app;
