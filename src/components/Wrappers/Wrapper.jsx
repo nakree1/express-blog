@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import Header from './Header';
 
 const Wrapper = ({children}) => (
-  <main className="container">
-    {children}
-  </main>
+  <Fragment>
+    <Header/>
+    <main className="container">
+      {children}
+    </main>
+  </Fragment>
+
 )
 
 export default Wrapper;
