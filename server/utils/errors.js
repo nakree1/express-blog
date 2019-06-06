@@ -1,29 +1,54 @@
 const HttpStatus = require('http-status-codes');
 
-class BaseError extends Error {
-  constructor(message = 'Internal Server Error') {
-    super(message);
-    // Ensure the name of this error is the same as the class name
-    this.name = this.constructor.name;
-    this.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-    this.message = message;
-    this.data = {};
-    this.expose = true;
-    // This clips the constructor invocation from the stack trace.
-    // It's not absolutely essential, but it does make the stack trace a little nicer.
-    //  @see Node.js reference (bottom)
-    Error.captureStackTrace(this, this.constructor);
-  }
+function BaseError(name) {
+  const temp = Error.apply(this, arguments);
+  temp.name = this.name = name || 'Error';
+  this.message = 'Internal Server Error';
+  this.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+  this.expose = process.env.NODE_ENV === 'development';
+  this.data = {};
+
+  Error.captureStackTrace(temp, this.constructor);
+
+  Object.defineProperty(this, 'stack', {
+      get: function () {
+        if (this.expose) {
+          return temp.stack.split('\n').slice(1);
+        } else {
+          return;
+        }
+      },
+      configurable: true
+  })
+
+  Object.defineProperty(this, 'body', {
+      get: function () {
+        return {
+          title: this.name,
+          message: this.message,
+          data: this.data,
+          trace: this.stack
+        }
+      },
+      configurable: true
+  })
 }
+
+BaseError.prototype = Object.create(Error.prototype, {
+  constructor: {
+    value: BaseError,
+    writable: true,
+    configurable: true
+  }
+});
+
 
 class ResourceNotFoundError extends BaseError {
   constructor(resource, query) {
-    super(`Resource ${resource} was not found.`);
-    this.name = 'ResourceNotFoundError';
+    super('ResourceNotFoundError');
+    this.message = `Resource ${resource} was not found.`;
     this.statusCode = HttpStatus.NOT_FOUND;
     this.data = { resource, query };
-
-    console.dir(this);
   }
 }
 

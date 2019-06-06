@@ -1,21 +1,30 @@
-export default (err, req, res, next) => {
-  console.log(err);
+import { ResourceNotFoundError } from '../utils/errors';
+import { ValidationError, DatabaseError } from 'sequelize';
 
-  if (err.name === 'ResourceNotFoundError') {
+export default (err, req, res, next) => {
+  if (err instanceof ResourceNotFoundError) {
+    console.error(err);
     res.status(err.statusCode);
-    res.send({
-      title: err.name,
-      message: err.message,
-      data: err.data,
-      // trace: err.expose ? err : undefined
-    });
-  } else {
+    res.send(err.body);
+    return;
+  }
+
+  if (err instanceof DatabaseError) {
+    console.error(err);
+    console.log('its validation error!')
     res.status(500);
     res.send({
       title: err.name,
       message: err.message,
-      data: err
-    })
+    });
+    return;
   }
 
+
+  console.error(err);
+  res.status(500);
+  res.send({
+      title: err.name,
+      message: err.message,
+    })
 }
