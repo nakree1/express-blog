@@ -20,9 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = models => {
-    User.hasMany(models.Article, {
-      onDelete: 'CASCADE'
-    });
+    User.hasMany(models.Article);
   };
 
   return User;

@@ -16,7 +16,21 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Article.associate = models => {
-    Article.belongsTo(models.User);
+    Article.belongsTo(models.User, {
+        onDelete: 'CASCADE'
+      }
+    );
+    Article.belongsToMany(models.ArticleTag, {
+      through: 'articlesByTag',
+      as: 'tags',
+      foreignKey: 'articleId'
+      // targetKey: 'articleId'
+    });
+    // Article.belongsToMany(models.ArticleTag, {
+    //   through: models.ArticlesByTag,
+    //   as: 'articleId',
+    //   timestamps: false
+    // });
   };
 
   return Article;
