@@ -3,9 +3,11 @@ import Wrapper from './Wrappers/Wrapper';
 import CreateUserForm from './Forms/CreateUserForm';
 import GetUsersForm from './Forms/GetUsersForm';
 import GetArticlesForm from './Forms/GetArticlesForm';
+import ArticleTagsList from './_common/ArticleTagsList';
 
 const App = () => (
   <Wrapper>
+    <ArticleTagsList/>
     <CreateUserForm/>
     <GetUsersForm/>
     <GetArticlesForm/>
