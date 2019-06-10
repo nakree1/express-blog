@@ -10,7 +10,7 @@ var http = require('http');
 var dotenv = require('dotenv').config();
 var db = require('../server/models');
 
-import createUsersWithArticles from '../server/seeders/createUsersWithArticles';
+import mainSeeder from '../server/seeders/mainSeeder';
 
 /**
  * Get port from environment and store in Express.
@@ -34,7 +34,7 @@ const eraseDatabaseOnSync = true;
 db.sequelize.sync({ force: eraseDatabaseOnSync })
   .then(async () => {
     if (eraseDatabaseOnSync) {
-      createUsersWithArticles();
+      mainSeeder();
     }
 
     server.listen(port, () => {
