@@ -2,14 +2,22 @@ import express from 'express';
 import getUsers from '../controllers/getUsers';
 import getArticlesByUserId from '../controllers/getArticlesByUserId';
 import createUser from '../controllers/createUser';
+import getArticleTags from '../controllers/articles/getArticleTags';
 
 const router = express.Router({
   strict: true
 });
 
-router.get('/users', getUsers);
-router.get('/articles/:userId', getArticlesByUserId);
-router.post('/users/create', createUser)
+// router.get('/users', getUsers);
+// router.post('/users/create', createUser)
+// router.get('/articles/:userId', getArticlesByUserId);
+
+// router.get('/article/:id', () => {});
+
+router.get('/articles/tags', getArticleTags);
+router.get('/articles/list', () => {});
+router.get('/articles/list/:tag', () => {});
+
 
 // router.use(authMiddleware);
 
