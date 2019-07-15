@@ -1,3 +1,5 @@
+import paginate from '../utils/paginate';
+
 module.exports = (sequelize, DataTypes) => {
   const Article = sequelize.define('article', {
       title: {
@@ -26,12 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'articleId'
       // targetKey: 'articleId'
     });
-    // Article.belongsToMany(models.ArticleTag, {
-    //   through: models.ArticlesByTag,
-    //   as: 'articleId',
-    //   timestamps: false
-    // });
   };
+
+  Article.paginate = options => paginate(Article, options);
 
   return Article;
 };

@@ -3,6 +3,7 @@ import getUsers from '../controllers/getUsers';
 import getArticlesByUserId from '../controllers/getArticlesByUserId';
 import createUser from '../controllers/createUser';
 import getArticleTags from '../controllers/articles/getArticleTags';
+import getArticles from '../controllers/articles/getArticles';
 
 const router = express.Router({
   strict: true
@@ -15,6 +16,7 @@ const router = express.Router({
 // router.get('/article/:id', () => {});
 
 router.get('/articles/tags', getArticleTags);
+router.get('/articles', getArticles);
 router.get('/articles/list', () => {});
 router.get('/articles/list/:tag', () => {});
 
