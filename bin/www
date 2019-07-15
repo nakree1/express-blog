@@ -26,9 +26,9 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-var mainSeeder = require('../server/seeders/mainSeeder');
+var mainSeeder = require('../server/seeders/mainSeeder').default;
 
-const eraseDatabaseOnSync = false;
+const eraseDatabaseOnSync = true;
 
 db.sequelize.sync({ force: eraseDatabaseOnSync })
   .then(async () => {

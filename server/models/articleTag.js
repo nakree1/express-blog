@@ -1,6 +1,13 @@
+import slugify from 'slugify';
+
 module.exports = (sequelize, DataTypes) => {
   const ArticleTag = sequelize.define('articleTag', {
       title: {
+        type: DataTypes.STRING(20),
+        unique: true,
+        allowNull: false
+      },
+      slug: {
         type: DataTypes.STRING(20),
         unique: true,
         allowNull: false
@@ -9,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false
     }
   );
+
+  ArticleTag.beforeValidate(articleTag => {
+    if (!articleTag.slug) {
+      articleTag.slug = slugify(articleTag.title, { lower: true });
+    }
+  })
 
   ArticleTag.associate = models => {
     // ArticleTag.belongsTo(models.ArticlesByTag, {
@@ -28,6 +41,8 @@ module.exports = (sequelize, DataTypes) => {
     //   timestamps: false
     // });
   };
+
+
 
   return ArticleTag;
 };

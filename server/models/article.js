@@ -1,4 +1,5 @@
 import paginate from '../utils/paginate';
+import slugify from './articleTag';
 
 module.exports = (sequelize, DataTypes) => {
   const Article = sequelize.define('article', {
@@ -6,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         // unique: true,
         allowNull: false
+      },
+      slug: {
+        type: DataTypes.STRING(100),
+        // unique: true,
+        // allowNull: false
       },
       content: {
         type: DataTypes.STRING(1000),
@@ -16,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true
     }
   );
+
+  // Article.beforeValidate(article => {
+  //   if (!article.slug) {
+  //     article.slug = slugify(article.title, { lower: true });
+  //   }
+  // })
 
   Article.associate = models => {
     Article.belongsTo(models.User, {
