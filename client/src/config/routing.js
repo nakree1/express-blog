@@ -4,5 +4,5 @@ export default function routing(params) {
     article: `/article/${params ? params : ':slug'}`,
 
     tag: `/tag/${params ? params : ':tag'}`
-  }
+  };
 }

@@ -11,7 +11,7 @@ import Feed from './pages/Feed/Feed';
 const App = () => (
   <Switch>
     <Wrapper>
-      <Route path={routing().root} component={Feed}/>
+      <Route path={routing().root} component={Feed} />
       {/*<Route component={Feed}/>*/}
       {/*<ArticleTagsList/>*/}
       {/*<CreateUserForm/>*/}
@@ -19,6 +19,6 @@ const App = () => (
       {/*<GetArticlesForm/>*/}
     </Wrapper>
   </Switch>
-)
+);
 
 export default App;

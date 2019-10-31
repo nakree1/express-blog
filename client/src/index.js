@@ -7,14 +7,11 @@ import store from './config/store.config';
 import './scss/main.scss';
 import App from './components/App';
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <App />
     </BrowserRouter>
-  </Provider>
-  ,
+  </Provider>,
   document.getElementById('root')
 );

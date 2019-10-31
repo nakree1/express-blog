@@ -8,6 +8,6 @@ const api = {
     getArticles: '',
     getArticlesByTag: ''
   }
-}
+};
 
 export default api;

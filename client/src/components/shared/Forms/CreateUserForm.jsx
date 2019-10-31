@@ -1,87 +1,101 @@
 import React, { Fragment } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 class CreateUserForm extends React.Component {
   state = {
     email: '',
     name: '',
     isFetching: false
-  }
+  };
 
-  handleChange = ({field, value}) => {
+  handleChange = ({ field, value }) => {
     this.setState({
       [field]: value
-    })
-  }
+    });
+  };
 
   handleSend = () => {
-    this.setState({isFetching: true}, () => {
+    this.setState({ isFetching: true }, () => {
       const { email, name } = this.state;
-      axios.post('/api/users/create', { email, name })
-        .then(res => {
+      axios
+        .post('/api/users/create', { email, name })
+        .then((res) => {
           this.setState({
             isFetching: false,
             email: '',
             name: ''
-          })
+          });
         })
-        .catch(err => {
+        .catch((err) => {
           this.setState({
             isFetching: false
-          })
-        })
-    })
-  }
+          });
+        });
+    });
+  };
 
   render() {
-    const {isFetching, name, email} = this.state;
+    const { isFetching, name, email } = this.state;
 
     return (
-        <div className="row">
-          <div className="col-6 my-5 mx-auto">
-            <div className="alert alert-secondary">
-              <p className="h2">
-                Create user
-              </p>
-              <div className="form-group">
-                <label htmlFor="emailInput">Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="emailInput"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  disabled={isFetching}
-                  value={email}
-                  onChange={({currentTarget}) => this.handleChange({ field: 'email',  value: currentTarget.value})}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="nameInput">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="nameInput"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter username"
-                  disabled={isFetching}
-                  value={name}
-                  onChange={({currentTarget}) => this.handleChange({ field: 'name',  value: currentTarget.value})}
-                />
-              </div>
-              <div className="form-group">
-                <button type="button" className="btn btn-primary btn-block" onClick={this.handleSend} disabled={isFetching}>
-                  {isFetching ?  (
-                    <Fragment>
-                      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"/>
-                      Creating...
-                    </Fragment>
-                  ) : 'Create'}
-                </button>
-              </div>
+      <div className="row">
+        <div className="col-6 my-5 mx-auto">
+          <div className="alert alert-secondary">
+            <p className="h2">Create user</p>
+            <div className="form-group">
+              <label htmlFor="emailInput">Email address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="emailInput"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                disabled={isFetching}
+                value={email}
+                onChange={({ currentTarget }) =>
+                  this.handleChange({ field: 'email', value: currentTarget.value })
+                }
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="nameInput">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="nameInput"
+                aria-describedby="emailHelp"
+                placeholder="Enter username"
+                disabled={isFetching}
+                value={name}
+                onChange={({ currentTarget }) =>
+                  this.handleChange({ field: 'name', value: currentTarget.value })
+                }
+              />
+            </div>
+            <div className="form-group">
+              <button
+                type="button"
+                className="btn btn-primary btn-block"
+                onClick={this.handleSend}
+                disabled={isFetching}
+              >
+                {isFetching ? (
+                  <Fragment>
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Creating...
+                  </Fragment>
+                ) : (
+                  'Create'
+                )}
+              </button>
             </div>
           </div>
         </div>
+      </div>
     );
   }
 }
