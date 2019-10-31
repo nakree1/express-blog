@@ -1,5 +1,5 @@
 import qs from 'qs';
-import axios from 'axios.config';
+import axios from 'client/src/config/axios.config';
 
 const api = {
   article: {

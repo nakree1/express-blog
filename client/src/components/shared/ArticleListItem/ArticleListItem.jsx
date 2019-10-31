@@ -5,6 +5,8 @@ import './ArticleListItem.scss';
 
 export default function ArticleListItem({ data }) {
 
+
+
   const link = routing('test').article
   return (
     <div className="mx-auto col-8 article">

@@ -1,6 +1,6 @@
 'use strict';
 
-import capitalizeString from '../../src/utils/capitalizeString';
+import capitalizeString from '../../../client/src/utils/capitalizeString';
 
 const fs = require('fs');
 const path = require('path');

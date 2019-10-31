@@ -1,6 +1,6 @@
-import { getRandomInt } from '../../src/utils/random';
+import { getRandomInt } from '../../../client/src/utils/random';
 
-const db = require('../models/index');
+const db = require('../models');
 const faker = require('faker');
 
 export default async function createArticles(count = 15) {

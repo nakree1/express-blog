@@ -1,4 +1,4 @@
-const db = require('../models/index');
+const db = require('../models');
 // const faker = require('faker');
 
 export default async function createTags() {
