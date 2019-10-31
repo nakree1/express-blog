@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/www --config nodemon.config.json",
+    "start-server": "nodemon --exec babel-node ./bin/www --config nodemon.config.json",
     "prettier": "prettier --write src/**/*.{jsx,js}"
   },
   "dependencies": {
