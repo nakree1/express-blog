@@ -7,7 +7,8 @@
     "start-nodemon": "nodemon --exec babel-node ./bin/www --config nodemon.config.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write server/**/*.{jsx,js}"
   },
   "dependencies": {
     "axios": "^0.19.0",

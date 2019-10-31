@@ -28,7 +28,7 @@ var server = http.createServer(app);
 
 var mainSeeder = require('../server/seeders/mainSeeder').default;
 
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 
 db.sequelize.sync({ force: eraseDatabaseOnSync })
   .then(async () => {
