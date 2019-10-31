@@ -1,11 +1,12 @@
 'use strict';
 
-import capitalizeString from '../../../client/src/utils/capitalizeString';
-
+import capitalizeString from '../utils/capitalizeString';
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+
 const basename = path.basename(__filename);
+
 const { DB_USERNAME, DB_PORT, DB_PASSWORD, DB_HOSTNAME } = require('../config/config.js');
 const config = {
   dialect: 'postgres',

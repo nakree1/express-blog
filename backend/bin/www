@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-var app = require('../server/server');
+var app = require('../src/server');
 var debug = require('debug')('express-blog:server');
 var http = require('http');
 var dotenv = require('dotenv').config();
-var db = require('../server/models');
+var db = require('../src/models');
 
 /**
  * Get port from environment and store in Express.
@@ -26,7 +26,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-var mainSeeder = require('../server/seeders/mainSeeder').default;
+var mainSeeder = require('../src/seeders/mainSeeder').default;
 
 const eraseDatabaseOnSync = false;
 

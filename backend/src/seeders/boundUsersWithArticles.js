@@ -1,4 +1,4 @@
-import { getRandomInt } from '../../../client/src/utils/random';
+import { getRandomInt } from '../utils/random';
 
 const db = require('../models');
 
