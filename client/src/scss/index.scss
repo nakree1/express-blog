@@ -1,1 +1,19 @@
-@import '~bootstrap/dist/css/bootstrap.css';
+@import 'common/reset';
+
+/* Utils */
+@import 'common/vars';
+
+/* Components */
+@import 'components/header';
+
+body {
+  margin: 0;
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+}

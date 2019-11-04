@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import ArticleTagsList from '../../shared/ArticleTags/ArticleTagsList';
-import ArticleListItem from '../../shared/ArticleListItem/ArticleListItem.jsx';
+import ArticleTagsList from '../../components/shared/articleTags/ArticleTagsList';
+import ArticleListItem from '../../components/shared/articleListItem/ArticleListItem.jsx';
 
 export default function Feed() {
   return (

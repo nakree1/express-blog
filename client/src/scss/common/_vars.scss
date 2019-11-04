@@ -1,1 +1,17 @@
-//
+$primary: #2684ff;
+$primary_75: desaturate($primary, 25%);
+$primary_50: desaturate($primary, 50%);
+$primary_25: desaturate($primary, 75%);
+
+$neutral: white;
+$neutral_5: darken($neutral, 5%);
+$neutral_10: darken($neutral, 10%);
+$neutral_20: darken($neutral, 20%);
+$neutral_30: darken($neutral, 30%);
+$neutral_40: darken($neutral, 40%);
+$neutral_50: darken($neutral, 50%);
+$neutral_60: darken($neutral, 60%);
+$neutral_70: darken($neutral, 70%);
+$neutral_80: darken($neutral, 80%);
+$neutral_90: darken($neutral, 90%);
+$neutral_95: darken($neutral, 95%);

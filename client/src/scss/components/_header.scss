@@ -1,0 +1,37 @@
+.header {
+  background-color: $neutral_95;
+  color: $neutral_5;
+  height: 50px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__logo {
+    .title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+      margin-left: 1rem;
+      color: $neutral_10;
+      position: relative;
+
+      &:after {
+        position: absolute;
+        content: '';
+        top: 2px;
+        bottom: 2px;
+        left: -0.5rem;
+        width: 1px;
+        background-color: $neutral_10;
+      }
+    }
+  }
+}
