@@ -5,10 +5,10 @@ import ArticleListItem from '../../components/shared/articleListItem/ArticleList
 export default function Feed() {
   return (
     <Fragment>
-      <ArticleTagsList />
-      <ArticleListItem />
-      <ArticleListItem />
-      <ArticleListItem />
+      {/*<ArticleTagsList />*/}
+      {/*<ArticleListItem />*/}
+      {/*<ArticleListItem />*/}
+      {/*<ArticleListItem />*/}
     </Fragment>
   );
 }

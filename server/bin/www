@@ -3,17 +3,17 @@
 /**
  * Module dependencies.
  */
+const config = require('../src/config/config');
 var app = require('../src/server');
 var debug = require('debug')('express-blog:server');
 var http = require('http');
-var dotenv = require('dotenv').config();
 var db = require('../src/models');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(config.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -28,12 +28,12 @@ var server = http.createServer(app);
 
 var mainSeeder = require('../src/seeders/mainSeeder').default;
 
-const eraseDatabaseOnSync = false;
+const eraseDatabaseOnSync = true;
 
 db.sequelize.sync({ force: eraseDatabaseOnSync })
   .then(async () => {
     if (eraseDatabaseOnSync) {
-      mainSeeder();
+      // mainSeeder();
     }
 
     server.listen(port, () => {

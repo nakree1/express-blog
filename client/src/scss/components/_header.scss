@@ -13,7 +13,7 @@
   &__logo {
     .title {
       font-size: 1.75rem;
-      font-weight: 700;
+      font-weight: $text-bold;
       color: white;
       text-decoration: none;
     }
@@ -31,6 +31,35 @@
         left: -0.5rem;
         width: 1px;
         background-color: $neutral_10;
+      }
+    }
+  }
+
+  &__auth {
+    display: flex;
+    justify-content: space-between;
+    .btn {
+      display: flex;
+      font-size: $text-m;
+      padding: 6px 16px;
+      margin-left: 1rem;
+      background-color: unset;
+      color: white;
+      font-weight: $text-medium;
+      cursor: pointer;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &.sign-in {
+      }
+
+      &.join {
+        color: darken($green, 30%);
+        font-weight: $text-bold;
+        border-radius: 18px;
+        background-color: $green;
       }
     }
   }

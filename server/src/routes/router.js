@@ -2,6 +2,7 @@ import express from 'express';
 import getUsers from '../controllers/getUsers';
 import getArticlesByUserId from '../controllers/getArticlesByUserId';
 import createUser from '../controllers/createUser';
+import login from '../controllers/login';
 import getArticleTags from '../controllers/articles/getArticleTags';
 import getArticles from '../controllers/articles/getArticles';
 import getArticlesByTag from '../controllers/articles/getArticlesByTag';
@@ -11,7 +12,8 @@ const router = express.Router({
 });
 
 // router.get('/users', getUsers);
-// router.post('/users/create', createUser)
+router.post('/users/create', createUser);
+router.post('/users/login', login);
 // router.get('/articles/:userId', getArticlesByUserId);
 
 // router.get('/article/:id', () => {});
@@ -19,7 +21,6 @@ const router = express.Router({
 router.get('/articles/tags', getArticleTags);
 router.get('/articles/list', getArticles);
 router.get('/articles/list/:tag', getArticlesByTag);
-
 
 // router.use(authMiddleware);
 

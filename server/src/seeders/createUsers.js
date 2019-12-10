@@ -5,7 +5,7 @@ const faker = require('faker');
 
 export default async function createUsers(count = 5) {
   const getUser = () => ({
-    name: faker.internet.userName(),
+    username: faker.internet.userName(),
     email: faker.internet.email()
   });
 
