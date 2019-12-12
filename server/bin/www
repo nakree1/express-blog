@@ -1,71 +1,11 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-const config = require('../src/config/config');
-var app = require('../src/server');
-var debug = require('debug')('express-blog:server');
-var http = require('http');
-var db = require('../src/models');
+const logger = require('../src/logger');
+const createDb = require('../src/models');
+const createApp = require('../src/server');
+const http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
-
-var port = normalizePort(config.PORT || '3000');
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-var mainSeeder = require('../src/seeders/mainSeeder').default;
-
-const eraseDatabaseOnSync = true;
-
-db.sequelize.sync({ force: eraseDatabaseOnSync })
-  .then(async () => {
-    if (eraseDatabaseOnSync) {
-      // mainSeeder();
-    }
-
-    server.listen(port, () => {
-      console.log(`API running on port ${port}`);
-    });
-    server.on('error', onError);
-    server.on('listening', onListening);
-  })
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-/**
- * Event listener for HTTP server "error" event.
- */
+const port = process.env.PORT || 3000;
 
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -91,14 +31,18 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
+async function start() {
+  const db = await createDb({ logger, eraseDatabase: false });
+  const app = createApp({ logger, db });
 
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const server = http.createServer();
+
+  server
+    .on('request', app)
+    .on('error', onError)
+    .listen(port, () => {
+      console.log(`API running on port ${port}`);
+    });
 }
+
+start();

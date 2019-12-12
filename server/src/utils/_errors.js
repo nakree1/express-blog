@@ -11,27 +11,27 @@ function BaseError(name) {
   Error.captureStackTrace(temp, this.constructor);
 
   Object.defineProperty(this, 'stack', {
-      get: function () {
-        if (this.expose) {
-          return temp.stack.split('\n').slice(1);
-        } else {
-          return;
-        }
-      },
-      configurable: true
-  })
+    get: function() {
+      if (this.expose) {
+        return temp.stack.split('\n').slice(1);
+      } else {
+        return;
+      }
+    },
+    configurable: true
+  });
 
   Object.defineProperty(this, 'body', {
-      get: function () {
-        return {
-          title: this.name,
-          message: this.message,
-          data: this.data,
-          trace: this.stack
-        }
-      },
-      configurable: true
-  })
+    get: function() {
+      return {
+        title: this.name,
+        message: this.message,
+        data: this.data,
+        trace: this.stack
+      };
+    },
+    configurable: true
+  });
 }
 
 BaseError.prototype = Object.create(Error.prototype, {
@@ -41,7 +41,6 @@ BaseError.prototype = Object.create(Error.prototype, {
     configurable: true
   }
 });
-
 
 class ResourceNotFoundError extends BaseError {
   constructor(resource, query) {
@@ -64,5 +63,5 @@ class InternalError extends BaseError {
 
 module.exports = {
   ResourceNotFoundError,
-  InternalError,
+  InternalError
 };

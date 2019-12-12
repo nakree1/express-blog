@@ -1,5 +1,4 @@
-import paginate from '../utils/paginate';
-import slugify from './articleTag';
+const paginate = require('../utils/paginate');
 
 module.exports = (sequelize, DataTypes) => {
   const Article = sequelize.define('article', {

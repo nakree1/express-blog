@@ -5,7 +5,7 @@
  * @param {number} max - max number
  * @return {number} a random floating point number
  */
-export function getRandomFloat(min, max) {
+module.exports = function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
 }
 
@@ -16,7 +16,7 @@ export function getRandomFloat(min, max) {
  * @param {number} max - max number
  * @return {number} a random integer
  */
-export function getRandomInt(min, max) {
+module.exports = function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -25,6 +25,6 @@ export function getRandomInt(min, max) {
  *
  * @return {boolean} a random true/false
  */
-export function getRandomBool() {
+module.exports = function getRandomBool() {
   return Math.random() >= 0.5;
 }

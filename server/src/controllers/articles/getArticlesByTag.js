@@ -1,4 +1,4 @@
-export default async (req, res, next) => {
+module.exports = async (req, res, next) => {
   req.context.models.Article.paginate({ params: req.query })
     .then(articles => {
       res.send(articles);

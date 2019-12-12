@@ -1,11 +1,11 @@
-import createTags from './createTags';
-import createArticles from './createArticles';
-import createUsers from './createUsers';
-import boundUsersWithArticles from './boundUsersWithArticles';
+const createTags = require('./createTags');
+const createArticles = require('./createArticles');
+const createUsers = require('./createUsers');
+const boundUsersWithArticles = require('./boundUsersWithArticles');
 
-export default async function mainSeeder() {
+module.exports = async function() {
   await createTags();
   await createArticles();
   await createUsers();
   await boundUsersWithArticles();
-}
+};

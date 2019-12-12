@@ -1,8 +1,8 @@
-import { getRandomInt } from '../utils/random';
+const getRandomInt = require('../utils/random').getRandomInt;
 
 const db = require('../models');
 
-export default async function boundUsersWithArticles() {
+module.exports = async function boundUsersWithArticles() {
   const userCount = await db.User.count();
 
   while (true) {

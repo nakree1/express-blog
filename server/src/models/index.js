@@ -1,14 +1,12 @@
-'use strict';
-
-import capitalizeString from '../utils/capitalizeString';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const capitalizeString = require('../utils/capitalizeString');
+// const mainSeeder = require('../seeders/mainSeeder');
+const { DB_USERNAME, DB_PORT, DB_PASSWORD, DB_HOSTNAME } = require('../config/config.js');
 
 const basename = path.basename(__filename);
 
-const { DB_USERNAME, DB_PORT, DB_PASSWORD, DB_HOSTNAME } = require('../config/config.js');
 const config = {
   dialect: 'postgres',
   database: 'express_blog',
@@ -18,30 +16,34 @@ const config = {
   port: DB_PORT || process.env.DB_PORT
 };
 
-console.log(config);
+module.exports = async function({ logger, eraseDatabase }) {
+  const db = {};
+  const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-const db = {};
+  fs.readdirSync(__dirname)
+    .filter((file) => {
+      return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
+    })
+    .forEach((file) => {
+      const model = sequelize['import'](path.join(__dirname, file));
+      db[capitalizeString(model.name)] = model;
+      console.log(`Loaded: ${capitalizeString(model.name)} from ${file}`);
+    });
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
-    db[capitalizeString(model.name)] = model;
-    console.log(`Loaded: ${capitalizeString(model.name)} from ${file}`);
+  Object.keys(db).forEach((modelName) => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+  db.sequelize = sequelize;
+  db.Sequelize = Sequelize;
+
+  await db.sequelize.sync({ force: eraseDatabase });
+
+  if (eraseDatabase) {
+    await mainSeeder();
   }
-});
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+  return db;
+};

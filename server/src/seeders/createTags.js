@@ -1,7 +1,7 @@
 const db = require('../models');
 // const faker = require('faker');
 
-export default async function createTags() {
+module.exports = async function createTags() {
   const tags = ['News', 'Science', 'Tech', 'Fashion'];
 
   tags.forEach(async (tag) => {

@@ -1,4 +1,4 @@
-export default async function paginate(model, { params, ...query }) {
+module.exports = async function paginate(model, { params, ...query }) {
   const { page, perPage } = getPaginationQuery(params);
   const total = await model.count();
   const pageCount = total > perPage ? Math.ceil( total / perPage) : 1;

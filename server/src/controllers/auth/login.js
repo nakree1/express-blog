@@ -1,3 +1,5 @@
+const db = require('../../models');
+
 module.exports = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -10,7 +12,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { user, token } = await req.context.models.User.authenticate({
+    const { user, token } = await db.User.authenticate({
       username,
       password,
       email

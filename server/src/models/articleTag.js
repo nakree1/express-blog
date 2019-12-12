@@ -1,4 +1,4 @@
-import slugify from 'slugify';
+const slugify = require('slugify');
 
 module.exports = (sequelize, DataTypes) => {
   const ArticleTag = sequelize.define('articleTag', {

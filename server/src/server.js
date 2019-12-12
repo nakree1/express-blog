@@ -1,38 +1,22 @@
-import modelsMiddleware from './middlewares/modelsMiddleware';
-
-const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
-// const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const bodyParser = require('body-parser');
 
-import bodyParser from 'body-parser';
-import errorHandler from './controllers/errorHandler';
+const errorHandler = require('./middlewares/errorHandler');
+const routes = require('./routes');
 
-export const app = express();
-const router = require('./routes/router');
+module.exports = function({ db, logger }) {
+  const app = express();
+  // app.use(logger);
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+  app.use((req, res, next) => {
+    req.base = `${req.protocol}://${req.get('host')}`;
+    req.logger = logger;
+    req.db = db;
+    return next();
+  });
+  app.use('/api', routes);
+  app.use(errorHandler);
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// app.use(compression());
-// app.use(cookieParser());
-
-app.use(express.static(path.join(__dirname, '..', 'build')));
-app.use(modelsMiddleware);
-
-app.use('/api', router);
-
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'build', 'index.html')));
-// app.use('/', (req, res) => res.send(`Hello world! ${process.env.TEST}`));
-
-// catch 404 and forward to error handler
-// app.use((req, res, next) => {
-//   next(createError(404));
-// });
-
-// error handler
-app.use(errorHandler);
-
-module.exports = app;
+  return app;
+};
