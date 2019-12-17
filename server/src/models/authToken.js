@@ -1,4 +1,5 @@
 import jwt from '../config/jwt';
+import InternalError from '../utils/errors/InternalError';
 
 module.exports = (sequelize, DataTypes) => {
   const AuthToken = sequelize.define('authToken', {
@@ -14,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
   AuthToken.generate = async function(userId) {
     if (!userId) {
-      throw new Error('AuthToken requires a user ID');
+      throw new InternalError('AuthToken requires a user ID');
     }
 
     const token = await jwt.sign({ userId });

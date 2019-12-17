@@ -1,4 +1,7 @@
+import { Op } from 'sequelize';
+
 import crypt from '../../config/crypt';
+import { NotUniqueError } from '../../utils/errors';
 
 export default async (req, res, next) => {
   try {
@@ -6,10 +9,17 @@ export default async (req, res, next) => {
 
     const { username, email, password } = req.body;
 
+    const isExist = await db.User.findOne({
+      where: {
+        [Op.or]: [{ username }, { email }]
+      }
+    });
+
+    if (isExist) {
+      throw new NotUniqueError('username or email');
+    }
 
     const hash = await crypt.hash(password);
-
-    console.log(hash)
 
     const user = await db.User.create({
       username,
@@ -17,8 +27,10 @@ export default async (req, res, next) => {
       password: hash
     });
 
-    res.status(200);
-    res.send(user);
+    res.send({
+      email: user.email,
+      username: user.username
+    });
   } catch (err) {
     next(err);
   }

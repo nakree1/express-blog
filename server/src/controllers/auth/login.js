@@ -1,26 +1,33 @@
-import db from '../../models';
+import { Op } from 'sequelize';
 
-export default async (req, res) => {
-  const { username, email, password } = req.body;
+import crypt from '../../config/crypt';
+import { BaseError } from '../../utils/errors';
 
-  console.log(req.body);
-
-  // if the username / password is missing, we use status code 400
-  // indicating a bad request was made and send back a message
-  if (!username || !password) {
-    return res.status(400).send('Request missing username or password param');
-  }
-
+export default async (req, res, next) => {
   try {
-    const { user, token } = await db.User.authenticate({
-      username,
-      password,
-      email
+    const { db } = req;
+    const { username, email, password } = req.body;
+
+    const user = await db.User.findOne({
+      where: {
+        [Op.or]: username ? [{ username }] : [{ email }]
+      }
     });
+
+    if (!user) {
+      throw new BaseError('Invalid email or password');
+    }
+
+    const isMatch = await crypt.compare(password, user.password);
+
+    if (!isMatch) {
+      throw new BaseError('Invalid email or password');
+    }
+
+    const { token } = await user.authorize();
 
     return res.json({ user, token });
   } catch (err) {
-    console.log(err);
-    return res.status(400).send('invalid username or password');
+    next(err);
   }
 }
