@@ -1,9 +1,5 @@
-const morgan = require('morgan');
+import morgan from 'morgan';
 
-const { ExtraError } = require('./utils/errors');
-
-console.log('ttt');
-console.log('ttt');
 
 // const obj = { test: 'foo' };
 //
@@ -19,4 +15,4 @@ console.log('ttt');
 //
 // test(1);
 
-module.exports = morgan('dev');
+export default morgan('dev');

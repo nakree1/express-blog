@@ -1,11 +1,11 @@
-const createTags = require('./createTags');
-const createArticles = require('./createArticles');
-const createUsers = require('./createUsers');
-const boundUsersWithArticles = require('./boundUsersWithArticles');
+import createTags from './createTags';
+import createArticles from './createArticles';
+import createUsers from './createUsers';
+import boundUsersWithArticles from './boundUsersWithArticles';
 
-module.exports = async function() {
+export default async function() {
   await createTags();
   await createArticles();
   await createUsers();
   await boundUsersWithArticles();
-};
+}

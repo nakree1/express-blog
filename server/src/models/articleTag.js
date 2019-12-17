@@ -1,4 +1,4 @@
-const slugify = require('slugify');
+import slugify from 'slugify';
 
 module.exports = (sequelize, DataTypes) => {
   const ArticleTag = sequelize.define('articleTag', {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
   return ArticleTag;
-};
+}
 
 
 

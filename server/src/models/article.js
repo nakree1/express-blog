@@ -1,4 +1,4 @@
-const paginate = require('../utils/paginate');
+import paginate from '../utils/paginate';
 
 module.exports = (sequelize, DataTypes) => {
   const Article = sequelize.define('article', {
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       slug: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(100)
         // unique: true,
         // allowNull: false
       },

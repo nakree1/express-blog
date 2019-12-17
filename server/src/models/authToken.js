@@ -1,4 +1,4 @@
-const jwt = require('../config/jwt');
+import jwt from '../config/jwt';
 
 module.exports = (sequelize, DataTypes) => {
   const AuthToken = sequelize.define('authToken', {

@@ -1,5 +1,6 @@
-const { isEmail, isLength } = require('validator');
-const { generate, REQUIRED, LENGTH, INVALID, MATCH, INFO } = require('./messages');
+import isLength from 'validator/lib/isLength';
+
+import { generate, INFO, INVALID, LENGTH, MATCH, REQUIRED } from './messages';
 
 const field = 'password';
 const secondField = 'confirmPassword';
@@ -9,7 +10,7 @@ const limit = {
   max: 256
 };
 
-module.exports = function({ password, confirmPassword }) {
+export default function({ password, confirmPassword }) {
   const msg = {
     ...generate({ field, ...limit }),
     [MATCH]: "Passwords don't not match",
@@ -40,4 +41,4 @@ module.exports = function({ password, confirmPassword }) {
   }
 
   return errors;
-};
+}

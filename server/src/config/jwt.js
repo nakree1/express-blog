@@ -1,5 +1,5 @@
-const TokenGenerator = require('../utils/tokenGenerator');
-const { TOKEN_SECRET, TOKEN_EXPIRES_IN } = require('./config');
+import TokenGenerator from '../utils/tokenGenerator';
+import { TOKEN_EXPIRES_IN, TOKEN_SECRET } from './config';
 
 const options = {
   algorithm: 'HS256',
@@ -11,4 +11,4 @@ const options = {
 
 const jwt = new TokenGenerator(TOKEN_SECRET, options);
 
-module.exports = jwt;
+export default jwt;

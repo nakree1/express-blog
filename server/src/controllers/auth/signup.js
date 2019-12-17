@@ -1,11 +1,15 @@
-const crypt = require('../../config/crypt');
-module.exports = async (req, res, next) => {
+import crypt from '../../config/crypt';
+
+export default async (req, res, next) => {
   try {
     const { db } = req;
 
     const { username, email, password } = req.body;
 
+
     const hash = await crypt.hash(password);
+
+    console.log(hash)
 
     const user = await db.User.create({
       username,
@@ -18,4 +22,4 @@ module.exports = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}

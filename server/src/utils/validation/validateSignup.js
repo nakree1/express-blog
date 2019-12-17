@@ -1,15 +1,14 @@
-const validate = require('./utils/validate');
+import validate from './utils/validate';
 
-module.exports = function({ email, username, password, confirmPassword }) {
-  debugger;
+export default function({ email, username, password, confirmPassword }) {
   const errors = {
-    ...validate.email(email),
-    ...validate.username(username),
-    ...validate.password({ password, confirmPassword })
+    // ...validate.email(email),
+    // ...validate.username(username),
+    // ...validate.password({ password, confirmPassword })
   };
 
   return {
     errors,
     isValid: !Object.keys(errors).length
   };
-};
+}

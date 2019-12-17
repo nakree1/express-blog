@@ -1,8 +1,8 @@
-const BaseError = require('./BaseError');
+import BaseError from './BaseError';
 
-module.exports = class ValidationError extends BaseError {
+export default class ValidationError extends BaseError {
   constructor(errors) {
     super('Invalid request variables');
     this.fields = errors;
   }
-};
+}

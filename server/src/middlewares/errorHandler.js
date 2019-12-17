@@ -1,8 +1,18 @@
 // const { ResourceNotFoundError } = require('../utils/errors');
-const { DatabaseError } = require('sequelize');
-const { ValidationError } = require('../utils/errors');
+import { DatabaseError, ValidationError as DBValidationError } from 'sequelize';
+import { ValidationError } from '../utils/errors';
 
-module.exports = (err, req, res) => {
+export default (err, req, res) => {
+  console.error(err);
+  if (err instanceof DBValidationError) {
+    console.log('Catched');
+    res.status(500);
+    res.send({
+      title: err.name,
+      message: err.message
+    });
+    return
+  }
   if (err instanceof DatabaseError) {
     console.error(err);
     console.log('its validation error!');
@@ -23,11 +33,11 @@ module.exports = (err, req, res) => {
     return;
   }
 
-  console.error(err);
-  console.error(err.errors);
+  // console.error(err);
+  // console.error(err.errors);
   res.status(500);
   res.send({
     title: err.name,
     message: err.message
   });
-};
+}

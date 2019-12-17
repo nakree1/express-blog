@@ -1,5 +1,4 @@
-module.exports = {
-  BaseError: require('./BaseError'),
-  ExtraError: require('./ExtraError'),
-  ValidationError: require('./ValidationError')
-};
+import BaseError from './BaseError';
+import ValidationError from './ValidationError';
+
+export { BaseError, ValidationError };

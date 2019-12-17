@@ -1,6 +1,5 @@
-const crypt = require('../config/crypt');
-const jwt = require('../config/jwt');
-const Op = require('sequelize').Op;
+import crypt from '../config/crypt';
+import { Op } from 'sequelize';
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -14,10 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING(80),
         unique: true,
-        allowNull: false,
-        validate: {
-          isEmail: true
-        }
+        allowNull: false
       },
       password: {
         type: DataTypes.STRING(80),
@@ -67,4 +63,4 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   return User;
-};
+}

@@ -1,4 +1,4 @@
-const HttpStatus = require('http-status-codes');
+import HttpStatus from 'http-status-codes';
 
 function BaseError(name) {
   const temp = Error.apply(this, arguments);
@@ -61,7 +61,7 @@ class InternalError extends BaseError {
   }
 }
 
-module.exports = {
+export default {
   ResourceNotFoundError,
   InternalError
 };

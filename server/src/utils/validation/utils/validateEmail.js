@@ -1,5 +1,6 @@
-const { isEmail, isLength } = require('validator');
-const { generate, REQUIRED, LENGTH, INVALID } = require('./messages');
+import isEmail from 'validator/lib/isEmail';
+import isLength from 'validator/lib/isLength';
+import { generate, INVALID, LENGTH, REQUIRED } from './messages';
 
 const field = 'email';
 
@@ -8,7 +9,7 @@ const limit = {
   max: 256
 };
 
-module.exports = function(value) {
+export default function(value) {
   const msg = generate({ field, ...limit });
 
   const errors = {};
@@ -22,4 +23,4 @@ module.exports = function(value) {
   }
 
   return errors;
-};
+}

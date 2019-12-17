@@ -1,6 +1,6 @@
-const db = require('../../models');
+import db from '../../models';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const { username, email, password } = req.body;
 
   console.log(req.body);
@@ -23,4 +23,4 @@ module.exports = async (req, res) => {
     console.log(err);
     return res.status(400).send('invalid username or password');
   }
-};
+}

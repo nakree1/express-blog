@@ -1,6 +1,6 @@
-const { ValidationError } = require('../utils/errors');
+import { ValidationError } from '../utils/errors';
 
-module.exports = function createValidateRequest(validator) {
+export default function createValidateRequest(validator) {
   return function validateRequest(req, res, next) {
     const { isValid, errors } = validator(req.body);
 
@@ -10,4 +10,4 @@ module.exports = function createValidateRequest(validator) {
       throw new ValidationError(errors);
     }
   };
-};
+}

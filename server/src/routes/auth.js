@@ -1,10 +1,10 @@
-const { Router } = require('express');
-const login = require('../controllers/auth/login');
-const signup = require('../controllers/auth/signup');
+import { Router } from 'express';
+import login from '../controllers/auth/login';
+import signup from '../controllers/auth/signup';
 
-const validateRequest = require('../middlewares/validateRequest');
-const validateSignup = require('../utils/validation/validateSignup');
+import validateRequest from '../middlewares/validateRequest';
+import validateSignup from '../utils/validation/validateSignup';
 
-module.exports = Router()
+export default Router()
   .post('/sign_up', validateRequest(validateSignup), signup)
   .post('/login', login);

@@ -1,9 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const capitalizeString = require('../utils/capitalizeString');
-// const mainSeeder = require('../seeders/mainSeeder');
-const { DB_USERNAME, DB_PORT, DB_PASSWORD, DB_HOSTNAME } = require('../config/config.js');
+import fs from 'fs';
+import path from 'path';
+import Sequelize from 'sequelize';
+
+import mainSeeder from '../seeders/mainSeeder';
+import capitalizeString from '../utils/capitalizeString';
+import { DB_HOSTNAME, DB_PASSWORD, DB_PORT, DB_USERNAME } from '../config/config.js';
 
 const basename = path.basename(__filename);
 
@@ -16,7 +17,7 @@ const config = {
   port: DB_PORT || process.env.DB_PORT
 };
 
-module.exports = async function({ logger, eraseDatabase }) {
+export default async function({ logger, eraseDatabase }) {
   const db = {};
   const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
@@ -42,8 +43,8 @@ module.exports = async function({ logger, eraseDatabase }) {
   await db.sequelize.sync({ force: eraseDatabase });
 
   if (eraseDatabase) {
-    await mainSeeder();
+    // await mainSeeder();
   }
 
   return db;
-};
+}

@@ -12,7 +12,7 @@ function generate({ field, min, max }) {
   }
 }
 
-module.exports = {
+export {
   INVALID,
   LENGTH,
   REQUIRED,
@@ -20,5 +20,5 @@ module.exports = {
   MATCH,
 
   generate
-}
+};
 

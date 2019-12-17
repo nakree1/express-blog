@@ -1,5 +1,9 @@
-module.exports = {
-  email: require('./validateEmail'),
-  password: require('./validatePassword'),
-  username: require('./validateUsername')
+import validateEmail from './validateEmail';
+import validatePassword from './validatePassword';
+import validateUsername from './validateUsername';
+
+export default {
+  email: validateEmail,
+  password: validatePassword,
+  username: validateUsername
 };

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const logger = require('../src/logger');
-const createDb = require('../src/models');
-const createApp = require('../src/server');
 const http = require('http');
+const logger = require('../src/logger');
+const createDB = require('../src/models').default;
+const createApp = require('../src/server').default;
+
 
 const port = process.env.PORT || 3000;
 
@@ -32,7 +33,7 @@ function onError(error) {
 }
 
 async function start() {
-  const db = await createDb({ logger, eraseDatabase: false });
+  const db = await createDB({ logger, eraseDatabase: true });
   const app = createApp({ logger, db });
 
   const server = http.createServer();

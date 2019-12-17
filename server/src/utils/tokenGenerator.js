@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 function TokenGenerator(secret, options) {
   this.secret = secret;
@@ -54,4 +54,4 @@ TokenGenerator.prototype.sign = function(payload, signOptions) {
 //   return jwt.sign(payload, this.secretOrPrivateKey, jwtSignOptions);
 // }
 
-module.exports = TokenGenerator;
+export default TokenGenerator;

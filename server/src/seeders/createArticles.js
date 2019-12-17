@@ -1,9 +1,8 @@
-const getRandomInt = require('../utils/random').getRandomInt;
+import faker from 'faker';
+import db from '../models';
+import { getRandomInt } from '../utils/random';
 
-const db = require('../models');
-const faker = require('faker');
-
-module.exports = async function createArticles(count = 15) {
+export default async function createArticles(count = 15) {
   const Op = db.Sequelize.Op;
   const getArticle = () => ({
     title: faker.lorem.words(),

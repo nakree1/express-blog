@@ -1,7 +1,7 @@
-const db = require('../models');
-const faker = require('faker');
+import faker from 'faker';
+import db from '../models';
 
-module.exports = async function createUsers(count = 5) {
+export default async function createUsers(count = 5) {
   const getUser = () => ({
     username: faker.internet.userName(),
     email: faker.internet.email()
