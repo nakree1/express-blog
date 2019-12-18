@@ -18,18 +18,20 @@ TokenGenerator.prototype.sign = function(payload, signOptions) {
   });
 };
 
-// TokenGenerator.prototype.verify = function(payload, signOptions) {
-//   return new Promise((resolve, reject) => {
-//     const jwtSignOptions = { ...this.options, ...signOptions };
-//     jwt.sign(payload, this.secret, jwtSignOptions, (err, token) => {
-//       if (err) {
-//         reject(err);
-//       }
-//
-//       resolve(token);
-//     });
-//   });
-// };
+TokenGenerator.prototype.verify = function(token, verifyOptions) {
+  return new Promise((resolve, reject) => {
+    const { algorithm, expiresIn } = this.options;
+    const jwtSignOptions = { algorithm, maxAge: expiresIn, ...verifyOptions };
+
+    jwt.verify(token, this.secret, jwtSignOptions, (err, payload) => {
+      if (err) {
+        reject(err);
+      }
+
+      resolve(payload);
+    });
+  });
+};
 
 // TokenGenerator.prototype.sign = function(payload, signOptions) {
 //   const jwtSignOptions = Object.assign({}, signOptions, this.options);

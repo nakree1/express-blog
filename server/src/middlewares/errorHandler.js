@@ -1,4 +1,3 @@
-import { DatabaseError } from 'sequelize';
 import { ValidationError, InternalError } from '../utils/errors';
 
 export default function errorHandler(err, req, res, next) {
@@ -8,13 +7,6 @@ export default function errorHandler(err, req, res, next) {
       message: err.message,
 
       stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-    });
-  }
-
-  if (err instanceof DatabaseError) {
-    res.status(500).send({
-      title: err.name,
-      message: err.message
     });
   }
 

@@ -13,6 +13,7 @@ export default function createApp({ db, logger }) {
     req.base = `${req.protocol}://${req.get('host')}`;
     req.logger = logger;
     req.db = db;
+    req.context = {};
     return next();
   });
   app.use('/api', routes);
