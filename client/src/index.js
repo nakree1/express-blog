@@ -8,6 +8,7 @@ import theme from './config/theme';
 import store from './config/store.config';
 
 import './scss/index.scss';
+import 'react-toastify/dist/ReactToastify.min.css';
 import App from './components/App';
 
 ReactDOM.render(
