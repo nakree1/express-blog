@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import { FAILURE, NONE, REQUEST, SUCCESS } from '../../config/constants';
 
 export function toggleItemInArray(state, payload) {
   const clonedState = [...state];
@@ -14,19 +15,19 @@ export function makeStatusReducer(action) {
   return handleActions(
     {
       [action.REQUEST]() {
-        return 'request';
+        return REQUEST;
       },
       [action.SUCCESS]() {
-        return 'success';
+        return SUCCESS;
       },
       [action.FAILURE]() {
-        return 'failure';
+        return FAILURE;
       },
       [action.FULFILL]() {
-        return 'none';
+        return NONE;
       }
     },
-    'none'
+    NONE
   );
 }
 
@@ -34,18 +35,18 @@ export function makeStatusWithResetReducer(action, resetAction) {
   return handleActions(
     {
       [action.REQUEST]() {
-        return 'request';
+        return REQUEST;
       },
       [action.SUCCESS]() {
-        return 'success';
+        return SUCCESS;
       },
       [action.FAILURE]() {
-        return 'failure';
+        return FAILURE;
       },
-      [resetAction]() {
-        return 'none';
+      [action.FULFILL]() {
+        return NONE;
       }
     },
-    'none'
+    NONE
   );
 }

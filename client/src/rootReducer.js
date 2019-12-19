@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import { signUp } from './modules/signUp/signUpReducer';
+import { auth } from './modules/auth/authReducer';
+import { pushLogout } from './modules/auth/authActions';
 
 const appReducer = combineReducers({
-  signUp
+  auth
 });
 
 export default (state, action) => {
-  if (action.type === 'LOGOUT') {
+  if (action.type === pushLogout.TRIGGER) {
     state = undefined;
   }
 

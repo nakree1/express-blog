@@ -7,4 +7,10 @@ const createTriggerBound = createTriggerRoutine.bind(null, prefix);
 
 export const pushSignUp = createRequestBound('SIGNUP_PUSH');
 export const saveSignUpField = createTriggerBound('SIGNUP_FIELD_SAVE');
+
+export const pushLogin = createRequestBound('LOGIN_PUSH');
+export const saveLoginField = createTriggerBound('LOGIN_FIELD_SAVE');
+
+export const pushLogout = createRequestBound('LOGOUT_PUSH');
+
 export const clearAll = createTriggerBound('SIGNUP_CLEAR_ALL');

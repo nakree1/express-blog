@@ -1,27 +1,25 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import PasswordField from '../form/PasswordField';
+import { authSelectors } from '../../modules/auth/authSelectors';
+import { pushSignUp, saveSignUpField, clearAll } from '../../modules/auth/authActions';
+import { REQUEST, SUCCESS } from '../../config/constants';
+
 import {
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   TextField,
-  Fab,
   Box,
   Container,
   CircularProgress
 } from '@material-ui/core';
-import PasswordField from '../form/PasswordField';
-import { signUpSelectors } from '../../modules/signUp/signUpSelectors';
-import { pushSignUp, saveSignUpField, clearAll } from '../../modules/signUp/signUpActions';
 
 export default function SignUpModal({ isOpen, handleClose }) {
-  const status = useSelector(signUpSelectors.getStatus);
-  const input = useSelector(signUpSelectors.getInput);
-  const errors = useSelector(signUpSelectors.getErrors);
+  const { status, input, errors } = useSelector(authSelectors.getSingUp);
   const dispatch = useDispatch();
 
   const handleSend = useCallback(() => dispatch(pushSignUp()), []);
@@ -32,16 +30,14 @@ export default function SignUpModal({ isOpen, handleClose }) {
   );
 
   useEffect(() => {
-    console.log(status);
-    if (status === 'success') {
-      console.log('CLOSE');
+    if (status === SUCCESS) {
       handleClose();
     }
 
     return () => () => dispatch(clearAll());
   }, [status, dispatch]);
 
-  const isRequest = status === 'request';
+  const isRequest = status === REQUEST;
 
   return (
     <Dialog
@@ -58,7 +54,7 @@ export default function SignUpModal({ isOpen, handleClose }) {
             occasionally.
           </DialogContentText>
           <TextField
-            type="email"
+            type="text"
             name="username"
             onChange={handleSave}
             disabled={isRequest}
