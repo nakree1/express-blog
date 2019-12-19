@@ -9,10 +9,5 @@ import ensureAuth from '../../middlewares/ensureAuth';
 
 export default Router()
   .post('/signup', validateRequest(validateSignup), signup)
-  .get('/test', ensureAuth, (req, res) => res.send(req.context.currentUser))
+  .get('/', ensureAuth, (req, res) => res.send(req.context.currentUser))
   .post('/login', validateRequest(validateLogin), login);
-
-console.dir(Router()
-  .post('/signup', validateRequest(validateSignup), signup)
-  .get('/test', ensureAuth, (req, res) => res.send(req.context.currentUser))
-  .post('/login', validateRequest(validateLogin), login))

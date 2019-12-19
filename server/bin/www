@@ -33,7 +33,7 @@ function onError(error) {
 }
 
 async function start() {
-  const db = await createDB({ logger, eraseDatabase: true });
+  const db = await createDB({ logger, eraseDatabase: false });
   const app = createApp({ logger, db });
 
   const server = http.createServer();

@@ -27,6 +27,15 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(AuthToken);
   };
 
+  User.prototype.getPublicProfile = function() {
+    const { username, email, id } = this;
+    return {
+      username,
+      email,
+      id
+    };
+  };
+
   User.prototype.authorize = async function() {
     const { authToken: AuthToken } = sequelize.models;
     const user = this;

@@ -26,8 +26,8 @@ export default async (req, res, next) => {
 
     const { token } = await user.authorize();
 
-    return res.json({ user, token });
+    return res.json({ user: user.getPublicProfile(), token });
   } catch (err) {
     next(err);
   }
-}
+};
