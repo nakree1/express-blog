@@ -2,6 +2,16 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'user',
     {
+      avatar: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      firstName: {
+        type: DataTypes.STRING(80),
+      },
+      lastName: {
+        type: DataTypes.STRING(80),
+      },
       username: {
         type: DataTypes.STRING(80),
         unique: true,
@@ -15,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING(80),
         allowNull: false
+      },
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {
@@ -28,8 +42,11 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.getPublicProfile = function() {
-    const { username, email, id } = this;
+    const { avatar, username, firstName, lastName, email, id } = this;
     return {
+      avatar,
+      firstName,
+      lastName,
       username,
       email,
       id

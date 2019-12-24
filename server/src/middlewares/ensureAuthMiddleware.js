@@ -3,7 +3,7 @@ import { AuthError } from '../utils/errors';
 
 const tokenType = 'Bearer ';
 
-export default async function ensureAuth(req, res, next) {
+export default async function ensureAuthMiddleware(req, res, next) {
   try {
     const tokenFromHeaders = req.header('Authorization');
 
@@ -23,7 +23,8 @@ export default async function ensureAuth(req, res, next) {
 
       const user = await db.User.findOne({
         where: {
-          id: Number(userId)
+          id: Number(userId),
+          isDeleted: false
         }
       });
 

@@ -1,6 +1,17 @@
 import { Router } from 'express';
 
-import ensureAuth from '../../middlewares/ensureAuth';
-import profile from './profile';
+import ensureAuthMiddleware from '../../middlewares/ensureAuthMiddleware';
+import filesMiddleware from '../../middlewares/filesMiddleware';
 
-export default Router().get('/profile', ensureAuth, profile);
+import uploadAvatar from './uploadAvatar';
+
+import getProfile from './profile/getProfile';
+import patchProfile from './profile/patchProfile';
+import deleteProfile from './profile/deleteProfile';
+
+
+export default Router()
+  .get('/profile', ensureAuthMiddleware, getProfile)
+  .patch('/profile', ensureAuthMiddleware, patchProfile)
+  .delete('/profile', ensureAuthMiddleware, deleteProfile)
+  .put('/upload-avatar', ensureAuthMiddleware, filesMiddleware() ,uploadAvatar)
