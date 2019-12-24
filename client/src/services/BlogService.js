@@ -1,8 +1,8 @@
 import api from './api';
 
-export default class ExampleService {
+export default class BlogService {
   static getTags(id) {
-    return api.get('/api/articles/tags');
+    return api.get('/articles/tags');
   }
 
   static getArticle() {

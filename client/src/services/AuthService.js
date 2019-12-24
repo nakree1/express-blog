@@ -1,11 +1,11 @@
 import api from './api';
 
-export default class ExampleService {
+export default class AuthService {
   static login(data) {
-    return api.post(`/api/auth/login`, data);
+    return api.post(`/auth/login`, data);
   }
 
   static signUp(data) {
-    return api.post(`/api/auth/signup`, data);
+    return api.post(`/auth/signup`, data);
   }
 }

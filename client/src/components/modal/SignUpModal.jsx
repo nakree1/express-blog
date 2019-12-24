@@ -18,27 +18,15 @@ import {
   CircularProgress
 } from '@material-ui/core';
 
-export default function SignUpModal({ isOpen, handleClose }) {
-  const { status, input, errors } = useSelector(authSelectors.getSingUp);
-  const dispatch = useDispatch();
-
-  const handleSend = useCallback(() => dispatch(pushSignUp()), []);
-  const handleSave = useCallback(
-    ({ currentTarget }) =>
-      dispatch(saveSignUpField({ field: currentTarget.name, value: currentTarget.value })),
-    [dispatch]
-  );
-
-  useEffect(() => {
-    if (status === SUCCESS) {
-      handleClose();
-    }
-
-    return () => () => dispatch(clearAll());
-  }, [status, dispatch]);
-
-  const isRequest = status === REQUEST;
-
+export function Template({
+  handleSave,
+  handleSend,
+  handleClose,
+  isOpen,
+  isRequest,
+  input = {},
+  errors = {}
+}) {
   return (
     <Dialog
       open={isOpen}
@@ -120,5 +108,39 @@ export default function SignUpModal({ isOpen, handleClose }) {
         </Container>
       </DialogContent>
     </Dialog>
+  );
+}
+
+export default function SignUpModal({ isOpen, handleClose }) {
+  const { status, input, errors } = useSelector(authSelectors.getSingUp);
+  const dispatch = useDispatch();
+
+  const handleSend = useCallback(() => dispatch(pushSignUp()), []);
+  const handleSave = useCallback(
+    ({ currentTarget }) =>
+      dispatch(saveSignUpField({ field: currentTarget.name, value: currentTarget.value })),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (status === SUCCESS) {
+      handleClose();
+    }
+
+    return () => () => dispatch(clearAll());
+  }, [status, dispatch]);
+
+  const isRequest = status === REQUEST;
+
+  return (
+    <Template
+      isRequest={isRequest}
+      input={input}
+      errors={errors}
+      isOpen={isOpen}
+      handleClose={handleClose}
+      handleSave={handleSave}
+      handleSend={handleSend}
+    />
   );
 }
