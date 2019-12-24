@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Wrapper from './shared/wrappers/Wrapper';
 import routing from '../config/routing';
 import Feed from '../pages/Feed/Feed';
+import Settings from '../pages/Settings/Settings';
 
 const App = () => (
   <>
@@ -20,12 +21,8 @@ const App = () => (
     <CssBaseline />
     <Switch>
       <Wrapper>
-        <Route path={routing().root} component={Feed} />
-        {/*<Route component={Feed}/>*/}
-        {/*<ArticleTagsList/>*/}
-        {/*<CreateUserForm/>*/}
-        {/*<GetUsersForm/>*/}
-        {/*<GetArticlesForm/>*/}
+        <Route exact path={routing().settings} component={Settings} />
+        <Route exact path={routing().root} component={Feed} />
       </Wrapper>
     </Switch>
   </>
