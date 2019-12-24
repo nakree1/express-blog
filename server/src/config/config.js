@@ -1,4 +1,5 @@
 import { config } from 'dotenv';
+import path from "path";
 
 config();
 
@@ -13,6 +14,10 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET;
 const TOKEN_EXPIRES_IN = process.env.TOKEN_EXPIRES_IN;
 const PASSWORD_SALT = process.env.PASSWORD_SALT;
 
+
+const UPLOAD_DIR = 'uploads';
+const UPLOAD_PATH = path.join(__dirname, '..', '..', UPLOAD_DIR);
+
 export {
   DB_NAME,
   DB_TABLE,
@@ -23,5 +28,8 @@ export {
 
   TOKEN_SECRET,
   TOKEN_EXPIRES_IN,
-  PASSWORD_SALT
+  PASSWORD_SALT,
+
+  UPLOAD_PATH,
+  UPLOAD_DIR
 };
