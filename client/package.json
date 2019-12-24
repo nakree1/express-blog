@@ -8,7 +8,7 @@
     "build-client": "react-scripts build",
     "eject-client": "react-scripts eject",
     "prettier-client": "prettier --write src/**/*.{jsx,js,json,css,scss}",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 9000",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -30,11 +30,12 @@
     "validator": "^12.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.5",
+    "@babel/core": "^7.7.7",
     "@storybook/addon-actions": "^5.2.8",
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
+    "babel-loader": "^8.0.5",
     "faker": "^4.1.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
