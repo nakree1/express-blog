@@ -7,6 +7,7 @@ import Wrapper from './shared/wrappers/Wrapper';
 import routing from '../config/routing';
 import Feed from '../pages/Feed/Feed';
 import Settings from '../pages/Settings/Settings';
+import AuthRoute from './shared/routes/AuthRoute';
 
 const App = () => (
   <>
@@ -21,7 +22,7 @@ const App = () => (
     <CssBaseline />
     <Switch>
       <Wrapper>
-        <Route exact path={routing().settings} component={Settings} />
+        <AuthRoute exact path={routing().settings} component={Settings} />
         <Route exact path={routing().root} component={Feed} />
       </Wrapper>
     </Switch>
