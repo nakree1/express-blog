@@ -1,16 +1,13 @@
 import isLength from 'validator/lib/isLength';
-
 import { generate, LENGTH, REQUIRED } from './messages';
-
-const field = 'username';
 
 const limit = {
   min: 2,
   max: 256
 };
 
-export default function(value, field) {
-  const msg = generate({ field, ...limit });
+export default function({ field, value, customLimit }) {
+  const msg = generate({ field, ...limit, ...customLimit });
 
   const errors = {};
 
