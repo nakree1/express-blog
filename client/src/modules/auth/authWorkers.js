@@ -8,6 +8,7 @@ import Notification from '../../services/notifications';
 import validateLogin from '../../utils/validation/validateLogin';
 import { getAccessToken, removeTokens, setAccessToken, setAuthHeader } from '../../services/api';
 import UserService from '../../services/UserService';
+import { pushDeleteProfile } from '../settings/settingsActions';
 
 function* logoutWorker() {
   removeTokens();
@@ -78,6 +79,7 @@ export function* signupWatcher() {
     takeLatest(pushSignUp.TRIGGER, signupWorker),
     takeLatest(pushLogin.TRIGGER, loginWorker),
     takeLatest(pushLoginByToken.TRIGGER, loginByTokenWorker),
-    takeLatest(pushLogout.TRIGGER, logoutWorker)
+    takeLatest(pushLogout.TRIGGER, logoutWorker),
+    takeLatest(pushDeleteProfile.TRIGGER, logoutWorker)
   ]);
 }

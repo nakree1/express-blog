@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: `${theme.spacing(4)}px auto`
   },
+  avatarInput: {
+    display: 'none'
+  },
   rowContent: {
     width: '100%'
   }
